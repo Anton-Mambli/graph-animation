@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .graph {
+	padding: 40px 0 0 0;
+	margin: 0 0 80px 0;
+}
+
+.graph.active {
+	margin: 0;
+}
+
+.graph__title {
+	margin: 0;
+	color: #d3d802;
+	text-transform: uppercase;
+}
+
+.graph__title span {
+	display: block;
+	color: #000000;
+}
+
+.graph__radio {
+	display: flex;
+	margin: 28px 0 0 0;
+	transition: margin-bottom 0.5s;
+	z-index: 20;
+	position: relative;
+}
+
+.graph__radio.show {
+	margin: 28px 0 124px 0;
+}
+
+.graph__radio-text {
+	color: #000000;
+	margin: 0 0 0 12px;
+}
+
+.graph__mark {
+	color: #ef7d01;
+	text-transform: uppercase;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.graph__mark.show {
+	opacity: 1;
+}
+
+.graph__img-body {
+	padding: 0 94px 175px 94px;
+	position: relative;
+	width: 100%;
+}
+
+.graph__svg {
+	position: absolute;
+	top: -183px;
+	left: 70px;
+	display: none;
+}
+
+.graph__svg.show {
+	display: block;
+}
+
+.graph__img {
+	position: absolute;
+	right: 0;
+}
+
+.graph__img--bad {
+	left: 75px;
+	top: -8px;
+	transition: opacity 0.5s, filter 0.5s;
+}
+
+.graph__img--bad.hide {
+	opacity: 0.3;
+	filter: grayscale(100%);
+}
+
+.graph-info {
+	border-top: 2px solid #000000;
+	opacity: 0;
+	transition: opacity 0.5s;
+	position: absolute;
+	left: -100%;
+}
+
+.graph-info.show {
+	left: initial;
+	position: initial;
+	opacity: 1;
+}
+
+.graph-info__row {
+	padding: 0 94px;
+	display: flex;
+	margin: 20px -16px 0 -16px;
+}
+
+.graph-info__col {
+	padding: 0 16px;
+}
+
+.graph-info__col:first-child {
+	margin: 0 100px 0 0;
+}
+
+.graph-info__label {
+	display: none;
+	color: #000000;
+	text-transform: uppercase;
+	margin: 0 0 4px 0;
+}
+
+.graph-info__text {
+	color: #6c6b6a;
+	margin: 0 0 8px 0;
+}
+
+.graph-info__link {
+	margin: 4px 0 0 0;
+	color: #ef7d01;
+	text-transform: uppercase;
+}
+
+.switch {
+	display: inline-block;
+	height: 34px;
+	position: relative;
+	width: 60px;
+}
+
+.switch input {
+	display: none;
+}
+
+.switch__slider {
+	background-color: #ccc;
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: .4s;
+}
+
+.switch {
+	display: inline-block;
+	height: 26px;
+	position: relative;
+	width: 46px;
+}
+
+.switch input {
+	display: none;
+}
+
+.slider {
+	background-color: #ccc;
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: .4s;
+}
+
+.slider:before {
+	background-color: #fff;
+	bottom: 3px;
+	content: "";
+	left: 4px;
+	position: absolute;
+	transition: .4s;
+	height: 20px;
+	width: 20px;
+}
+
+input:checked + .slider {
+	background-color: #ef7d01;
+}
+
+input:checked + .slider:before {
+	transform: translateX(19px);
+}
+
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+    </style>
+    <section class="graph">
+        <div class="full-wrapper">
+            <h2 class="graph__title">
+                жизненный цикл
+                <span>стартапа</span>
+            </h2>
+            <div class="graph__radio">
+                <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox"/>
+                    <div class="slider round"></div>
+                </label>
+                <div class="graph__radio-text">с AdventureLand</div>
+            </div>
+            <div class="graph__mark">кратный рост</div>
+            <div class="graph__img-body">
+    
+                <div class="graph__svg">
+    
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="731"
+                            height="366"
+                            viewBox="0 0 731 366"
+                    >
+                        <g fill="none" fill-rule="evenodd">
+    
+    
+                            <!--ЛИНИЯ-->
+                            <path
+                                    id="graph"
+                                    stroke-linejoin="round"
+                                    stroke-width="4"
+                                    d="M24 359.5c337.042-37 563.376-143.167 679-318.5"
+                                    style="stroke:#D3D802;stroke-width:3px;stroke-dasharray:1358;stroke-dashoffset:1358;"
+                            />
+                            <animate
+                                    xlink:href="#graph"
+                                    begin='click'
+                                    id="ani-graph"
+                                    dur="3s"
+                                    attributeName="stroke-dashoffset"
+                                    to="0"
+                                    fill="freeze"
+                            />
+                            <!--КРУЖКИ-->
+                            <circle
+                                    id="point1"
+                                    cx="23"
+                                    cy="359"
+                                    r="5"
+                                    fill="#FFF"
+                                    stroke="#EF7D01"
+                                    stroke-width="4"
+                                    opacity="0"
+                            />
+                            <animate
+                                    xlink:href="#point1"
+                                    begin='click'
+                                    restart="whenNotActive"
+                                    id="ani-point1"
+                                    attributeName="opacity"
+                                    to="1"
+                                    fill="freeze"
+                                    dur="0.25s"
+    
+                            />
+    
+                            <circle
+                                    id="point3"
+                                    cx="703"
+                                    cy="41"
+                                    r="5"
+                                    fill="#FFF"
+                                    stroke="#EF7D01"
+                                    stroke-width="4"
+                                    opacity="0"
+                            />
+                            <animate
+                                    xlink:href="#point3"
+                                    begin='click'
+                                    restart="whenNotActive"
+                                    id="ani-point3"
+                                    attributeName="opacity"
+                                    to="1"
+                                    fill="freeze"
+                                    dur="0.25s"
+    
+                            />
+    
+                            <circle
+                                    id="point2"
+                                    cx="383"
+                                    cy="279"
+                                    r="5"
+                                    fill="#FFF"
+                                    stroke="#EF7D01"
+                                    stroke-width="4"
+                                    opacity="0"
+                            />
+                            <animate
+                                    xlink:href="#point2"
+                                    begin='click'
+                                    restart="always"
+                                    id="ani-point2"
+                                    attributeName="opacity"
+                                    to="1"
+                                    fill="freeze"
+                                    dur="0.25s"
+    
+                            />
+                        </g>
+                    </svg>
+    
+    
+                </div>
+    
+                <!--img src="local/static/assets/img/svg/graph-good.svg" alt="" class="graph__img graph__img--good" style="display: none !important;"-->
+                <img src="local/static/assets/img/svg/graph-bad.svg" alt="" class="graph__img graph__img--bad">
+            </div>
+            <div class="graph__body">
+    
+                <div class="graph__info graph-info">
+                    <div class="graph-info__row">
+                        <div class="graph-info__col">
+                            <div class="graph-info__item">
+                                <div class="graph-info__label">idea</div>
+                                <div class="graph-info__text">Онлайн-акселератор Techno Skolkovo Community</div>
+                                <div class="graph-info__text">70+&nbsp;мероприятий в&nbsp;год</div>
+                                <a href="#" class="graph-info__link">MVP</a>
+                            </div>
+                        </div>
+                        <div class="graph-info__col">
+                            <div class="graph-info__item">
+                                <div class="graph-info__label">angel</div>
+                                <div class="graph-info__text">Питч-сессии каждую неделю</div>
+                                <div class="graph-info__text">Онлайн-платформа для коммуникации с&nbsp;инвесторами
+                                                              и&nbsp;экспертами
+                                </div>
+                                <a href="#" class="graph-info__link">Клиенты</a>
+                            </div>
+                        </div>
+                        <div class="graph-info__col">
+                            <div class="graph-info__item">
+                                <div class="graph-info__label">seed</div>
+                                <div class="graph-info__text">Ежемесячный стартап челлендж ИнвесТОР для лучших стартапов</div>
+                                <div class="graph-info__text">Pitch&amp;Go by&nbsp;Skolkovo Ventures</div>
+                                <a href="#" class="graph-info__link">Результаты</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+    
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    let radioBtn     = document.querySelector('#checkbox');
+    let badImg       = document.querySelector('.graph__img--bad');
+    let goodImg      = document.querySelector('.graph__svg');
+    let graphInfo    = document.querySelector('.graph-info');
+    let graphMark    = document.querySelector('.graph__mark');
+    let graphBody    = document.querySelector('.graph__radio');
+    let graphSection = document.querySelector('.graph');
+
+    let svgLine   = document.getElementById('ani-graph');
+    let svgPoint1 = document.getElementById('ani-point1');
+    let svgPoint2 = document.getElementById('ani-point2');
+    let svgPoint3 = document.getElementById('ani-point3');
+
+    let animate           = document.querySelectorAll('animate')
+    const toggleGraph     = () => {
+        let isChecked = radioBtn.checked;
+
+
+        if (isChecked) {
+
+            svgLine.beginElement();
+
+
+            setTimeout(() => svgPoint1.beginElement(), 100);
+            setTimeout(() => svgPoint2.beginElement(), 800);
+            setTimeout(() => svgPoint3.beginElement(), 1730);
+
+            badImg.classList.add('hide');
+            goodImg.classList.add('show');
+            graphInfo.classList.add('show');
+            graphMark.classList.add('show');
+            graphBody.classList.add('show');
+            graphSection.classList.add('active');
+        } else {
+
+
+            animate.forEach(item => {
+                item.onend = () => {
+                    console.log('endEvent fired');
+                }
+            })
+            badImg.classList.remove('hide');
+            goodImg.classList.remove('show');
+            graphInfo.classList.remove('show');
+            graphMark.classList.remove('show');
+            graphBody.classList.remove('show');
+            graphSection.classList.remove('active');
+
+
+        }
+    }
+
+
+
+    radioBtn.addEventListener('click', toggleGraph)
+
+});
+
+    </script>
+</body>
+</html>
